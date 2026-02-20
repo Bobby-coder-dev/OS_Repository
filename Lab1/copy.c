@@ -26,15 +26,34 @@ int myopen(const char *filename, int flags, size_t buffersize){
 }
 
 int myread(int fd, void *buff, size_t count){
-    return read(fd, buff, count);
+    //return read(fd, buff, count);
+    __asm__("mov %0, %%edi" : : "r"(fd));
+    __asm__("mov %0, %%rsi" : : "r"(buff));
+    __asm__("mov %0, %%rdx" : : "r"(count));
+    __asm__("mov $0, %rax");
+    __asm__("syscall");
+    __asm__("mov %%eax, %0" : "=r"(fd) :);
+    return fd;
 }
 
 int mywrite(int fd, void *buff, size_t count){
-    return write(fd, buff, count);
+    //return write(fd, buff, count);
+
+    __asm__("mov %0, %%edi" : : "r"(fd));
+    __asm__("mov %0, %%rsi" : : "r"(buff));
+    __asm__("mov %0, %%rdx" : : "r"(count));
+    __asm__("mov $1, %rax");
+    __asm__("syscall");
+    __asm__("mov %%eax, %0" : "=r"(fd) :);
+    return fd;
 }
 
 int myclose(int fd){
-    return close(fd);
+    __asm__("mov %0, %%edi" : : "r"(fd));
+    __asm__("mov $3, %rax");
+    __asm__("syscall");
+    __asm__("mov %%eax, %0" : "=r"(fd) :);
+    return fd;
 }
 
 int main(int argc, char **argv){
