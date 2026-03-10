@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#define SIZE 1024
+#define SIZE 256
 
 void func_cwd(char *buf, size_t buffersize){
     if (getcwd(buf, buffersize) == NULL) {
