@@ -20,7 +20,7 @@ void func_cd(char *parametro){
 }
 
 void func_mkdir(char *parametro){
-    if(mkdir(parametro, 0755) != 0){ 
+    if(mkdir(parametro, 0700) != 0){ 
         perror("Erro ao criar diretório");
     }
 }
