@@ -20,7 +20,7 @@ public class ExemploSemaforo {
             for (int i = 0; i < NUM_STEPS; i++) {
                 boolean acquired = false;
                 try {
-                    semaphore.acquire();
+                    semaphore.acquire();s
                     acquired = true;
                     sum += 1;
                 } catch (InterruptedException e) {
